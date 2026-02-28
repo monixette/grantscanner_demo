@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grant Scanner — Decision · IDEAS 2026</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .score-slider {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+
+        .notes-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .note-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--surface2);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--muted2);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .note-chip:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .adjusted-note {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .decision-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        @media(max-width:640px) {
+            .decision-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">GS</div>
+            <div><span class="brand-name">Grant Scanner</span><span class="brand-org">Accountability Lab Mexico</span>
+            </div>
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="nav-link">🏠 Dashboard</a>
+            <a href="grant.html" class="nav-link">📋 Grant Detail</a>
+            <a href="score.html" class="nav-link">📊 Score</a>
+            <a href="#" class="nav-link active">✅ Decision</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="nav-badge">Mapeo 2026</span>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+        <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="index.html" class="mobile-nav-link">🏠 Dashboard</a>
+        <a href="grant.html" class="mobile-nav-link">📋 Grant Detail</a>
+        <a href="score.html" class="mobile-nav-link">📊 Score</a>
+        <a href="#" class="mobile-nav-link active">✅ Decision</a>
+        <div style="padding-top:8px;border-top:1px solid var(--border);">
+            <button class="mobile-nav-link w-full" style="text-align:left;" onclick="toggleTheme()"><span
+                    id="mobileThemeLabel">🌙 Switch to Light Mode</span></button>
+        </div>
+    </div>
+
+    <div class="page-wrap">
+        <div class="container">
+
+            <div class="flex items-center gap-8 mb-20" style="font-size:13px;color:var(--muted2);flex-wrap:wrap;">
+                <a href="index.html" style="color:var(--muted2);">Dashboard</a><span>›</span>
+                <a href="grant.html" style="color:var(--muted2);">IDEAS 2026</a><span>›</span>
+                <a href="score.html" style="color:var(--muted2);">Score</a><span>›</span>
+                <span style="color:var(--text);">Decision</span>
+            </div>
+
+            <div class="label mb-8">Human Review</div>
+            <h1 class="page-title">Make a Decision</h1>
+            <p class="page-sub">Review the AI score, adjust if needed, add context, then commit to Go / Pending / No-Go
+            </p>
+
+            <div class="two-col mb-20">
+
+                <!-- Score adjustment -->
+                <div class="card">
+                    <div class="label mb-4">AI Score</div>
+                    <div class="flex items-center gap-12 mb-16">
+                        <div style="font-size:44px;font-weight:900;color:var(--accent);line-height:1;"
+                            id="displayScore">72</div>
+                        <div>
+                            <div class="badge badge-go mb-4">🟢 High alignment</div>
+                            <div class="text-xs text-muted">Fundación Merced IDEAS 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="label mb-8">Adjust Score (optional)</div>
+                    <input type="range" class="score-slider mb-8" min="0" max="100" value="72" id="scoreSlider"
+                        oninput="updateScore(this.value)" />
+                    <div class="flex justify-between text-xs text-muted mb-4" style="justify-content:space-between;">
+                        <span>0 — No fit</span><span>50 — Neutral</span><span>100 — Perfect</span>
+                    </div>
+                    <div class="adjusted-note" id="adjustedNote" style="display:none;">⚠️ Score adjusted from AI
+                        baseline (72)</div>
+
+                    <hr style="border:none;border-top:1px solid var(--border);margin:16px 0;" />
+
+                    <div class="label mb-8">Key Reminders</div>
+                    <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted2);">
+                        <div class="flex gap-8 items-center"><span style="color:var(--accent)">✓</span><span>Donataria
+                                Autorizada vigente ✅</span></div>
+                        <div class="flex gap-8 items-center"><span style="color:var(--gold)">▲</span><span>Documentar
+                                trabajo formal con jóvenes 12–29 (Cat. 2)</span></div>
+                        <div class="flex gap-8 items-center"><span style="color:var(--red)">⏰</span><span>Cierre: 27
+                                marzo 2026 — <strong style="color:var(--text);">27 días</strong></span></div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="card">
+                    <div class="label mb-12">Notes for Proposal</div>
+                    <div class="notes-wrap mb-16">
+                        <div class="note-chip" onclick="addNote(this)">➕ Integrity Icon como evidencia principal de
+                            ciudadanía juvenil</div>
+                        <div class="note-chip" onclick="addNote(this)">➕ Civic Action Teams → grupos de jóvenes (Cat. 2
+                            req.)</div>
+                        <div class="note-chip" onclick="addNote(this)">➕ Framing: "laboratorios de ciudadanía juvenil"
+                        </div>
+                        <div class="note-chip" onclick="addNote(this)">➕ Solicitar bases PDF para confirmar presupuesto
+                            elegible</div>
+                    </div>
+                    <textarea id="customNotes"
+                        placeholder="Escribe contexto adicional, estrategia de framing, o instrucciones al generador de propuesta…"
+                        style="height:120px;"></textarea>
+                </div>
+            </div>
+
+            <!-- Decision cards -->
+            <div class="label mb-16">Your Decision</div>
+            <div class="decision-cards-grid mb-20">
+                <div class="decision-card go" onclick="selectDecision('go', this)" id="card-go">
+                    <span style="font-size:28px;">✅</span>
+                    <div>
+                        <div class="font-bold mb-4">Go</div>
+                        <div class="text-sm text-muted">Proceed to proposal generation — AI will draft the application
+                        </div>
+                    </div>
+                </div>
+                <div class="decision-card pending" onclick="selectDecision('pending', this)" id="card-pending">
+                    <span style="font-size:28px;">⏸️</span>
+                    <div>
+                        <div class="font-bold mb-4">Pending</div>
+                        <div class="text-sm text-muted">Save for later review — add to monitoring queue</div>
+                    </div>
+                </div>
+                <div class="decision-card nogo" onclick="selectDecision('nogo', this)" id="card-nogo">
+                    <span style="font-size:28px;">❌</span>
+                    <div>
+                        <div class="font-bold mb-4">No Go</div>
+                        <div class="text-sm text-muted">Archive this grant — flag for next cycle</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="bottom-steps">
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot active"></div>
+            <div class="bottom-dot"></div>
+            <div class="bottom-dot"></div>
+        </div>
+        <span class="text-sm text-muted">Step 4 of 6 — Decision</span>
+        <div class="flex gap-8">
+            <a href="score.html" class="btn btn-ghost">← Score</a>
+            <a href="generating.html" class="btn btn-primary" id="proceedBtn"
+                style="opacity:.5;pointer-events:none;">Generate Proposal →</a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        function updateScore(v) {
+            document.getElementById('displayScore').textContent = v;
+            document.getElementById('adjustedNote').style.display = v != 72 ? 'block' : 'none';
+        }
+        function addNote(el) {
+            const ta = document.getElementById('customNotes');
+            const text = el.textContent.replace('➕ ', '');
+            ta.value = (ta.value ? ta.value + '\n' : '') + '• ' + text;
+            el.style.opacity = '.4'; el.style.pointerEvents = 'none';
+        }
+        function selectDecision(type, card) {
+            document.querySelectorAll('.decision-card').forEach(c => c.style.outline = 'none');
+            card.style.outline = '2px solid var(--accent)';
+            const btn = document.getElementById('proceedBtn');
+            if (type === 'go') {
+                btn.style.opacity = '1'; btn.style.pointerEvents = 'auto';
+                btn.textContent = '⚡ Generate Proposal →';
+            } else {
+                btn.style.opacity = '.4'; btn.style.pointerEvents = 'none';
+                btn.textContent = type === 'pending' ? '⏸ Save & Return →' : '✕ Archive Grant →';
+                if (type !== 'go') { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+            }
+        }
+    </script>
+</body>
+
+</html>

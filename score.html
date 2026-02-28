@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grant Scanner — Pre-Qualification Score · IDEAS 2026</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .insight-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .insight-row:last-child {
+            border: none;
+        }
+
+        .insight-icon {
+            font-size: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .strategy-box {
+            background: rgba(16, 185, 129, .05);
+            border: 1px solid rgba(16, 185, 129, .18);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, .05);
+            border: 1px solid rgba(245, 158, 11, .18);
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .dimension-detail {
+            background: var(--surface2);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            transition: background var(--transition);
+        }
+
+        .dimension-detail:hover {
+            background: var(--surface3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">GS</div>
+            <div>
+                <span class="brand-name">Grant Scanner</span>
+                <span class="brand-org">Accountability Lab Mexico</span>
+            </div>
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="nav-link">🏠 Dashboard</a>
+            <a href="grant.html" class="nav-link">📋 Grant Detail</a>
+            <a href="#" class="nav-link active">📊 Score Report</a>
+            <a href="#" class="nav-link">⚙️ Settings</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="nav-badge">Mapeo 2026</span>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+        </div>
+        <button class="burger" id="burgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="index.html" class="mobile-nav-link">🏠 Dashboard</a>
+        <a href="grant.html" class="mobile-nav-link">📋 Grant Detail</a>
+        <a href="#" class="mobile-nav-link active">📊 Score</a>
+        <div style="padding-top:8px;border-top:1px solid var(--border);">
+            <button class="mobile-nav-link w-full" style="text-align:left;" onclick="toggleTheme()">
+                <span id="mobileThemeLabel">🌙 Switch to Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE -->
+    <div class="page-wrap">
+        <div class="container">
+
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-8 mb-20" style="font-size:13px;color:var(--muted2);flex-wrap:wrap;">
+                <a href="index.html" style="color:var(--muted2);" class="hover-link">Dashboard</a>
+                <span>›</span>
+                <a href="grant.html" style="color:var(--muted2);" class="hover-link">IDEAS 2026</a>
+                <span>›</span>
+                <span style="color:var(--text);">Pre-Qualification Score</span>
+            </div>
+
+            <div class="label mb-8">AI-Generated Analysis · Feb 28, 2026</div>
+            <h1 class="page-title">Pre-Qualification Report</h1>
+            <p class="page-sub">Fundación Merced IDEAS 2026 × Accountability Lab Mexico</p>
+
+            <!-- Main two-col: gauge + bars -->
+            <div class="two-col mb-20">
+
+                <!-- Gauge column -->
+                <div class="card" style="text-align:center;">
+                    <div class="label mb-12">Affinity Score</div>
+                    <div class="gauge-wrap">
+                        <div class="gauge-ring">
+                            <svg viewBox="0 0 140 140" width="140" height="140">
+                                <defs>
+                                    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#10B981" />
+                                        <stop offset="100%" stop-color="#F59E0B" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="gauge-track" cx="70" cy="70" r="60" />
+                                <circle class="gauge-fill" cx="70" cy="70" r="60" id="gFill" />
+                            </svg>
+                            <div class="gauge-label">
+                                <div class="gauge-num text-accent" id="gNum">0</div>
+                                <div class="gauge-denom">/ 100</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="badge badge-go" style="font-size:13px;padding:8px 20px;margin:8px auto;">✅ RECOMMENDED
+                        — GO</span>
+
+                    <hr style="border:none;border-top:1px solid var(--border);margin:16px 0;" />
+
+                    <div style="font-size:13px;text-align:left;display:flex;flex-direction:column;gap:10px;">
+                        <div class="flex items-center gap-8">
+                            <span>📋</span>
+                            <div><span class="text-muted">Alignment (sheet):</span> <strong
+                                    style="color:var(--text);">High</strong></div>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <span>⚡</span>
+                            <div><span class="text-muted">Status:</span> <strong class="text-accent">Abierto · 27 mar
+                                    2026</strong></div>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <span>🌎</span>
+                            <div><span class="text-muted">Geografía:</span> <strong style="color:var(--text);">México
+                                    ✓</strong></div>
+                        </div>
+                        <div class="flex items-center gap-8">
+                            <span>⚠️</span>
+                            <div><span class="text-muted">Watch:</span> <strong style="color:var(--gold);">Documentar
+                                    exp. juventudes</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score bars column -->
+                <div class="card">
+                    <div class="label mb-16">Score Breakdown (100 pts)</div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>🎯 Alineación Misional</span>
+                            <span class="text-accent">20 / 25</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="80"></div>
+                        </div>
+                        <span class="tooltip">Democracia y ciudadanía están alineadas directamente con la misión de AL
+                            Mexico. La evidencia del portafolio (Integrity Icon, CATs) refuerza credibilidad.</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>🌍 Elegibilidad Geográfica</span>
+                            <span class="text-accent">15 / 15</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="100"></div>
+                        </div>
+                        <span class="tooltip">AL Mexico está constituida en México y opera exclusivamente en el país.
+                            Score perfecto.</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>🏛️ Tipo de Organización</span>
+                            <span class="text-accent">13 / 15</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="87"></div>
+                        </div>
+                        <span class="tooltip">OSC legalmente constituida con Donataria Autorizada vigente. Pequeña
+                            deducción por no ser primariamente una organización juvenil (Cat. 2 requiere demostrar
+                            trabajo con jóvenes).</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>👥 Experiencia con Juventudes</span>
+                            <span class="text-gold">6 / 10</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="60"></div>
+                        </div>
+                        <span class="tooltip">AL Mexico trabaja con comunidades pero la documentación formal de trabajo
+                            con grupos de jóvenes 12–29 años necesita reforzarse para Categoría 2.</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>📅 Ventana de Tiempo</span>
+                            <span class="text-gold">8 / 10</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="80"></div>
+                        </div>
+                        <span class="tooltip">27 días al cierre es tiempo ajustado pero manejable con el pipeline de
+                            propuestas de Grant Scanner.</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>🔬 Capacidad Técnica</span>
+                            <span class="text-accent">9 / 10</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="90"></div>
+                        </div>
+                        <span class="tooltip">AL tiene track record probado de implementación de proyectos cívicos con
+                            metodologías innovadoras (Integrity Icon, Voice2Rep, CATs).</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>🤝 Valores Compartidos</span>
+                            <span class="text-accent">9 / 10</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill" data-pct="90"></div>
+                        </div>
+                        <span class="tooltip">Merced apoya democracia, ciudadanía y transparencia — valores centrales de
+                            AL Mexico con amplia evidencia pública.</span>
+                    </div>
+
+                    <div class="score-bar-wrap with-tooltip">
+                        <div class="score-bar-label">
+                            <span>⚠️ Riesgo / Deducción</span>
+                            <span style="color:var(--red);">−8 pts</span>
+                        </div>
+                        <div class="score-bar-track">
+                            <div class="score-bar-fill risk" data-pct="22"></div>
+                        </div>
+                        <span class="tooltip">Deducción por: (1) trabajo con juventudes a documentar más formalmente,
+                            (2) plazo ajustado de preparación (27 días).</span>
+                    </div>
+
+                    <hr style="border:none;border-top:1px solid var(--border);margin:14px 0 10px;" />
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm text-muted">Score Total</span>
+                        <span style="font-size:22px;font-weight:900;color:var(--accent);">72 / 100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strengths + Watch -->
+            <div class="two-col mb-20">
+                <div>
+                    <p class="label mb-12" style="color:var(--accent);">Points of Strength</p>
+                    <div class="strategy-box">
+                        <div class="insight-row">
+                            <span class="insight-icon">✓</span>
+                            <span><strong style="color:var(--text);">México nacional</strong> — AL opera exactamente en
+                                el territorio elegible; sin restricciones geográficas internas</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">✓</span>
+                            <span><strong style="color:var(--text);">Integrity Icon</strong> — campaña pública de
+                                democracia con participación juvenil y comunitaria activa</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">✓</span>
+                            <span><strong style="color:var(--text);">Civic Action Teams (CATs)</strong> — formación de
+                                jóvenes activistas cívicos → evidencia directa para Cat. 2</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">✓</span>
+                            <span><strong style="color:var(--text);">Accountapreneur</strong> — emprendimiento cívico
+                                con jóvenes → portafolio de impacto</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">✓</span>
+                            <span>Donataria Autorizada vigente · Constitución legal consolidada · Reportes listos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="label mb-12" style="color:var(--gold);">Watch Points</p>
+                    <div class="warning-box">
+                        <div class="insight-row">
+                            <span class="insight-icon">▲</span>
+                            <span>Documentar formalmente <strong style="color:var(--text);">grupos/colectivos de jóvenes
+                                    12–29</strong> beneficiarios directos de proyectos previos</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">▲</span>
+                            <span>Si constitución &gt;3 años: preparar <strong style="color:var(--text);">evidencia de
+                                    al menos 1 año</strong> trabajando en redes juveniles alineadas</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">▲</span>
+                            <span><strong style="color:var(--text);">Cierre: 27 marzo</strong> — activar inmediatamente
+                                el pipeline de generación de propuesta</span>
+                        </div>
+                        <div class="insight-row">
+                            <span class="insight-icon">▲</span>
+                            <span>Revisar bases PDF en fundacionmerced.org.mx/ideas2026 para confirmar presupuesto
+                                elegible y formato de presentación</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Framing strategy -->
+            <div class="card card-glass mb-20" style="border-color:rgba(139,92,246,.2);">
+                <div class="flex items-center gap-12 mb-16">
+                    <span style="font-size:28px;">🧭</span>
+                    <div>
+                        <div class="font-bold mb-4" style="font-size:15px;">Framing Strategy</div>
+                        <div class="text-sm text-muted">Narrative bridge recomendado para la propuesta</div>
+                    </div>
+                </div>
+                <p style="font-size:13px;line-height:1.8;color:var(--muted2);margin-bottom:16px;">
+                    Presentar a AL Mexico como <strong style="color:var(--text);">"la organización que convierte a
+                        jóvenes en guardianes de la democracia local"</strong>. Los CATs y el Integrity Icon se enmarcan
+                    como <em>laboratorios de ciudadanía juvenil</em> — donde jóvenes de 18–29 años aprenden a
+                    documentar, denunciar y celebrar la integridad pública. El proyecto IDEAS 2026 financiaría la
+                    <strong style="color:var(--text);">siguiente fase de escalamiento</strong> de este modelo a nuevas
+                    comunidades.
+                </p>
+                <div class="label mb-8">Portfolio Connections</div>
+                <div class="portfolio-tags">
+                    <span class="tag tag-accent">Integrity Icon MX 2024</span>
+                    <span class="tag tag-accent">Civic Action Teams</span>
+                    <span class="tag tag-accent">Accountapreneur 2023</span>
+                    <span class="tag tag-purple">Voice2Rep</span>
+                    <span class="tag">HLPF 2024 Youth Delegation</span>
+                    <span class="tag">Teatro Comunitario Iztapalapa</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <div class="bottom-steps">
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot active"></div>
+            <div class="bottom-dot"></div>
+            <div class="bottom-dot"></div>
+            <div class="bottom-dot"></div>
+        </div>
+        <span class="text-sm text-muted">Step 3 of 6 — Score Report</span>
+        <div class="flex gap-8">
+            <a href="grant.html" class="btn btn-ghost">← Grant Detail</a>
+            <a href="decision.html" class="btn btn-primary">Make a Decision →</a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Gauge animation
+        const TARGET = 72;
+        const CIRC = 2 * Math.PI * 60;
+        const fill = document.getElementById('gFill');
+        const num = document.getElementById('gNum');
+        fill.style.strokeDasharray = CIRC;
+        fill.style.strokeDashoffset = CIRC;
+        let start = null;
+        function anim(ts) {
+            if (!start) start = ts;
+            const p = Math.min((ts - start) / 1400, 1);
+            const e = 1 - Math.pow(1 - p, 3);
+            num.textContent = Math.round(e * TARGET);
+            fill.style.strokeDashoffset = CIRC - (e * (TARGET / 100) * CIRC);
+            if (p < 1) requestAnimationFrame(anim);
+        }
+        requestAnimationFrame(anim);
+        setTimeout(() => {
+            document.querySelectorAll('.score-bar-fill').forEach(el => {
+                el.style.width = el.dataset.pct + '%';
+            });
+        }, 400);
+    </script>
+</body>
+
+</html>

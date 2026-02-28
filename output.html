@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grant Scanner — Proposal Output · IDEAS 2026</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .output-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        @media(max-width:1024px) {
+            .output-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .output-sidebar {
+                order: -1;
+            }
+        }
+
+        .doc-wrap {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 32px;
+            overflow-y: auto;
+            max-height: 72vh;
+        }
+
+        @media(max-width:640px) {
+            .doc-wrap {
+                padding: 18px 18px;
+                max-height: none;
+            }
+        }
+
+        .sidebar-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin-bottom: 14px;
+        }
+
+        .sidebar-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+        }
+
+        .sidebar-meta-row:last-child {
+            border: none;
+        }
+
+        .meta-key {
+            color: var(--muted2);
+        }
+
+        .meta-val {
+            font-weight: 600;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border2);
+            background: var(--surface2);
+            color: var(--muted2);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .action-btn .icon {
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .copy-success {
+            color: var(--accent);
+            animation: fadeOut 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1
+            }
+
+            80% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
+        .amp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .amp-stat {
+            background: var(--surface2);
+            border-radius: 10px;
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .amp-val {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .amp-lbl {
+            font-size: 10px;
+            color: var(--muted2);
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">GS</div>
+            <div><span class="brand-name">Grant Scanner</span><span class="brand-org">Accountability Lab Mexico</span>
+            </div>
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="nav-link">🏠 Dashboard</a>
+            <a href="grant.html" class="nav-link">📋 Grant Detail</a>
+            <a href="score.html" class="nav-link">📊 Score</a>
+            <a href="#" class="nav-link active">📄 Output</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="nav-badge">Mapeo 2026</span>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+        <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="index.html" class="mobile-nav-link">🏠 Dashboard</a>
+        <a href="#" class="mobile-nav-link active">📄 Output</a>
+        <div style="padding-top:8px;border-top:1px solid var(--border);">
+            <button class="mobile-nav-link w-full" style="text-align:left;" onclick="toggleTheme()"><span
+                    id="mobileThemeLabel">🌙 Switch to Light Mode</span></button>
+        </div>
+    </div>
+
+    <div class="page-wrap">
+        <div class="container">
+
+            <div class="flex items-center justify-between mb-20" style="flex-wrap:wrap;gap:12px;">
+                <div>
+                    <div class="label mb-4">Generated Application Draft</div>
+                    <h1 class="page-title" style="margin-bottom:4px;">Proposal · IDEAS 2026</h1>
+                    <p class="text-sm text-muted">Fundación Merced · Generated Feb 28, 2026 · v1 draft · AI-assisted</p>
+                </div>
+                <div class="flex gap-8">
+                    <span class="badge badge-go">✅ Score 72/100</span>
+                    <span class="badge badge-urgent">⚡ Cierra 27 mar</span>
+                </div>
+            </div>
+
+            <div class="output-layout">
+
+                <!-- Document preview -->
+                <div class="doc-wrap doc-preview" id="docContent">
+
+                    <div class="doc-meta">
+                        Funder: Fundación Merced · Programme: IDEAS 2026<br />
+                        Applicant: Accountability Lab Mexico (AL Mexico)<br />
+                        Draft Status: v1 · AI-Assisted · Feb 28, 2026<br />
+                        Deadline: 27 marzo 2026, 23:30 hrs CDMX
+                    </div>
+
+                    <h1>Proyecto: Guardianes Democráticos · Ciudadanía Juvenil en Acción</h1>
+                    <p><strong>Applicant Organization:</strong> Accountability Lab Mexico (AL Mexico)</p>
+                    <hr />
+
+                    <h2>1. Organizational Context</h2>
+                    <p>Accountability Lab Mexico (AL Mexico) is a civil society organization dedicated to strengthening
+                        democracy, transparency, and civic accountability in Mexico. Since its founding, AL Mexico has
+                        built a portfolio of evidence-based programs that engage citizens — particularly young people —
+                        in monitoring governance, demanding accountability, and celebrating integrity at the local
+                        level.</p>
+                    <p>Our flagship programs include the <strong>Integrity Icon Campaign</strong>, which reached over 25
+                        million impressions in its 2024 edition; the <strong>Civic Action Teams (CATs)</strong>, which
+                        train young civic monitors in communities across Mexico; and the
+                        <strong>Accountapreneur</strong> program, which builds entrepreneurial civic capacity among
+                        youth aged 18–29.</p>
+
+                    <h2>2. Project Description</h2>
+                    <h3>Title: Guardianes Democráticos — Plataforma de Ciudadanía Juvenil</h3>
+                    <p>AL Mexico proposes to scale its Civic Action Teams model to 3 new metropolitan areas, directly
+                        engaging <strong>240+ young people (ages 16–29)</strong> as trained civic monitors and community
+                        accountability advocates. The project aligns with the IDEAS 2026 Categoría 2 framework: AL
+                        Mexico will work directly with groups and collectives of youth in structured co-creation
+                        processes over 12 months.</p>
+
+                    <h3>Objectives</h3>
+                    <p>1. Train 240 young civic monitors across Guadalajara, Monterrey, and CDMX in accountability
+                        methodologies.<br />
+                        2. Co-create 3 community accountability campaigns with youth-led collectives.<br />
+                        3. Produce a replicable "jóvenes guardianes" model for national adoption.<br />
+                        4. Position 20+ youth as public voices on democratic integrity via media and civil society
+                        forums.</p>
+
+                    <h2>3. Theory of Change</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>If…</th>
+                                <th>Then…</th>
+                                <th>Because…</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Young people receive structured civic training</td>
+                                <td>They monitor and report on local governance</td>
+                                <td>Methodology proven by AL's CAT model</td>
+                            </tr>
+                            <tr>
+                                <td>Youth campaigns amplify accountability narratives</td>
+                                <td>Communities demand greater transparency</td>
+                                <td>Integrity Icon shows 25M+ reach (2024)</td>
+                            </tr>
+                            <tr>
+                                <td>Youth become civic leaders</td>
+                                <td>Democratic culture strengthens over time</td>
+                                <td>Sustained engagement beyond project period</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>4. Budget Framework</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Amount (MXN)</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Training workshops (3 cities × 4 sessions)</td>
+                                <td>$ 180,000</td>
+                                <td>36%</td>
+                            </tr>
+                            <tr>
+                                <td>Campaign production (photography, video, design)</td>
+                                <td>$ 120,000</td>
+                                <td>24%</td>
+                            </tr>
+                            <tr>
+                                <td>External facilitators and consultants</td>
+                                <td>$ 80,000</td>
+                                <td>16%</td>
+                            </tr>
+                            <tr>
+                                <td>Community forums and events</td>
+                                <td>$ 60,000</td>
+                                <td>12%</td>
+                            </tr>
+                            <tr>
+                                <td>Monitoring, evaluation and reporting</td>
+                                <td>$ 40,000</td>
+                                <td>8%</td>
+                            </tr>
+                            <tr>
+                                <td>Dissemination and media outreach</td>
+                                <td>$ 20,000</td>
+                                <td>4%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>TOTAL</strong></td>
+                                <td><strong>$ 500,000 MXN</strong></td>
+                                <td><strong>100%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><em>Note: Budget covers activities, production, and external consultancy only, consistent with
+                            Fundación Merced eligibility guidelines. AL Mexico personnel contribute as in-kind
+                            co-funding.</em></p>
+
+                    <h2>5. Sustainability &amp; Replicability</h2>
+                    <p>The Guardianes Democráticos model will be documented and open-sourced under a Creative Commons
+                        license, enabling adoption by partner organizations across Mexico. AL Mexico's relationship with
+                        the broader Accountability Lab global network provides pathways for future funding and peer
+                        learning beyond the IDEAS 2026 grant period.</p>
+                    <hr />
+                    <p style="font-size:11px;color:var(--muted2);">Draft generated by Grant Scanner · Accountability Lab
+                        Mexico · Feb 28, 2026 · v1 — Requires human review and revision before submission</p>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="output-sidebar">
+
+                    <div class="sidebar-card">
+                        <div class="label mb-12">Document Info</div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Grant</span><span class="meta-val">IDEAS
+                                2026</span></div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Funder</span><span
+                                class="meta-val">Fundación Merced</span></div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Score</span><span
+                                class="meta-val text-accent">72 / 100</span></div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Words</span><span class="meta-val"
+                                id="wordCount">—</span></div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Deadline</span><span class="meta-val"
+                                style="color:var(--gold);">27 mar · 23:30</span></div>
+                        <div class="sidebar-meta-row"><span class="meta-key">Status</span><span class="meta-val">Draft
+                                v1</span></div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <div class="label mb-12">Actions</div>
+                        <button class="action-btn" onclick="copyDoc()"><span class="icon">📋</span><span
+                                id="copyLabel">Copy Markdown</span></button>
+                        <button class="action-btn" onclick="downloadDoc()"><span class="icon">⬇️</span>Download
+                            .md</button>
+                        <a href="https://dillinger.io/" target="_blank" class="action-btn"><span
+                                class="icon">↗️</span>Open in Dillinger</a>
+                        <button class="action-btn" onclick="window.print()"><span class="icon">🖨️</span>Print / Export
+                            PDF</button>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <div class="label mb-8">Amplification Impact</div>
+                        <p class="text-xs text-muted mb-12">If funded, estimated impact of AL Mexico's accountability
+                            work at scale:</p>
+                        <div class="amp-grid">
+                            <div class="amp-stat">
+                                <div class="amp-val">240</div>
+                                <div class="amp-lbl">Youth trained</div>
+                            </div>
+                            <div class="amp-stat">
+                                <div class="amp-val">3</div>
+                                <div class="amp-lbl">Cities</div>
+                            </div>
+                            <div class="amp-stat">
+                                <div class="amp-val" style="color:var(--gold);">25M+</div>
+                                <div class="amp-lbl">Reach est.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html" class="btn btn-ghost w-full" style="justify-content:center;">
+                        ← Return to Dashboard
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="bottom-steps">
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot done"></div>
+            <div class="bottom-dot active"></div>
+        </div>
+        <span class="text-sm text-muted">Step 6 of 6 — Output</span>
+        <a href="index.html" class="btn btn-primary">← New Grant Search</a>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Word count
+        const content = document.getElementById('docContent').innerText;
+        document.getElementById('wordCount').textContent = content.trim().split(/\s+/).length.toLocaleString() + ' words';
+
+        function copyDoc() {
+            const md = document.getElementById('docContent').innerText;
+            navigator.clipboard.writeText(md).then(() => {
+                const lbl = document.getElementById('copyLabel');
+                lbl.textContent = '✓ Copied!';
+                lbl.classList.add('copy-success');
+                setTimeout(() => { lbl.textContent = 'Copy Markdown'; lbl.classList.remove('copy-success'); }, 2200);
+            });
+        }
+        function downloadDoc() {
+            const md = document.getElementById('docContent').innerText;
+            const a = document.createElement('a');
+            a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(md);
+            a.download = 'AL_Mexico_IDEAS2026_Draft_v1.md';
+            a.click();
+        }
+    </script>
+</body>
+
+</html>

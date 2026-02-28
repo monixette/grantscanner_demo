@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grant Scanner — Fundación Merced IDEAS 2026</title>
+    <link rel="stylesheet" href="shared.css" />
+    <style>
+        .excerpt-block {
+            border-left: 3px solid var(--border2);
+            padding: 14px 18px;
+            background: var(--surface2);
+            border-radius: 0 10px 10px 0;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--muted2);
+            margin-bottom: 10px;
+        }
+
+        .excerpt-block.green {
+            border-color: var(--accent);
+        }
+
+        .excerpt-block.gold {
+            border-color: var(--gold);
+        }
+
+        .excerpt-block.purple {
+            border-color: var(--purple);
+        }
+
+        .excerpt-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .excerpt-block.green .excerpt-label {
+            color: var(--accent);
+        }
+
+        .excerpt-block.gold .excerpt-label {
+            color: var(--gold);
+        }
+
+        .excerpt-block.purple .excerpt-label {
+            color: var(--purple);
+        }
+
+        .cat-card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 10px;
+            transition: border-color var(--transition);
+        }
+
+        .cat-card:hover {
+            border-color: var(--border2);
+        }
+
+        .cat-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .cat-req {
+            font-size: 12px;
+            color: var(--muted2);
+            line-height: 1.9;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            margin-top: 1px;
+            font-size: 14px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            transition: background var(--transition);
+        }
+
+        .contact-row:last-child {
+            border: none;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+            width: 32px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .align-check-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+        }
+
+        .align-check {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: all var(--transition);
+        }
+
+        .align-check:hover {
+            border-color: var(--border2);
+            transform: translateY(-1px);
+        }
+
+        .align-check-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--muted2);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb a {
+            color: var(--muted2);
+            transition: color var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-icon">GS</div>
+            <div>
+                <span class="brand-name">Grant Scanner</span>
+                <span class="brand-org">Accountability Lab Mexico</span>
+            </div>
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="nav-link">🏠 Dashboard</a>
+            <a href="#" class="nav-link active">📋 Grant Detail</a>
+            <a href="#" class="nav-link">📄 Reports</a>
+            <a href="#" class="nav-link">⚙️ Settings</a>
+        </div>
+        <div class="navbar-actions">
+            <span class="nav-badge">Mapeo 2026</span>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+        </div>
+        <button class="burger" id="burgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="index.html" class="mobile-nav-link">🏠 Dashboard</a>
+        <a href="#" class="mobile-nav-link active">📋 Grant Detail</a>
+        <a href="#" class="mobile-nav-link">📄 Reports</a>
+        <div style="padding-top:8px;border-top:1px solid var(--border);">
+            <button class="mobile-nav-link w-full" style="text-align:left;" onclick="toggleTheme()">
+                <span id="mobileThemeLabel">🌙 Switch to Light Mode</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PAGE -->
+    <div class="page-wrap">
+        <div class="container">
+
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Dashboard</a>
+                <span>›</span>
+                <span style="color:var(--text);">Fundación Merced · IDEAS 2026</span>
+            </div>
+
+            <!-- Countdown banner -->
+            <div class="countdown-banner mb-20">
+                <div style="text-align:center;min-width:52px;">
+                    <div class="countdown-num" id="daysLeft">27</div>
+                    <div class="countdown-label">días</div>
+                </div>
+                <div style="width:1px;height:40px;background:rgba(16,185,129,.3);flex-shrink:0;"></div>
+                <div>
+                    <div class="font-bold text-accent mb-4" style="font-size:14px;">⚡ Convocatoria Abierta — IDEAS 2026
+                    </div>
+                    <div class="text-sm text-muted">Fundación Merced · Cierre: 27 marzo 2026, 23:30 hrs CDMX</div>
+                </div>
+                <div style="margin-left:auto;flex-shrink:0;">
+                    <a href="https://fundacionmerced.org.mx/ideas2026/" target="_blank" class="btn btn-primary"
+                        style="font-size:12px;padding:8px 16px;">Ver convocatoria ↗</a>
+                </div>
+            </div>
+
+            <!-- Header card -->
+            <div class="card mb-20" style="border-color:rgba(16,185,129,.2);">
+                <div class="flex items-center justify-between mb-16" style="flex-wrap:wrap;gap:8px;">
+                    <div class="flex gap-8" style="flex-wrap:wrap;">
+                        <span class="badge badge-urgent">⚡ Abierto Ahora</span>
+                        <span class="badge badge-open">🟢 High Alignment</span>
+                        <span class="badge badge-invite">México · OSC</span>
+                    </div>
+                    <span class="text-xs text-muted">Verificado: Feb 28, 2026 · fundacionmerced.org.mx</span>
+                </div>
+                <h1 style="font-size:24px;font-weight:800;letter-spacing:-.4px;margin-bottom:8px;">
+                    Fundación Merced · IDEAS 2026
+                </h1>
+                <p class="text-muted mb-20" style="font-size:14px;line-height:1.6;">
+                    Convocatoria para OSC mexicanas trabajando en democracia, ciudadanía activa y juventudes. Donataria
+                    Autorizada requerida.
+                </p>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <div class="meta-key">Donante</div>
+                        <div class="meta-val">Fundación Merced</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-key">Convocatoria abre</div>
+                        <div class="meta-val text-accent">2 marzo 2026</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-key">Fecha cierre</div>
+                        <div class="meta-val" style="color:var(--gold);">27 marzo 2026 · 23:30 CDMX</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-key">Plataforma</div>
+                        <div class="meta-val text-sm">conexionfmerced.vform.io</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-key">Geografía</div>
+                        <div class="meta-val text-accent">🇲🇽 México (nacional)</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-key">Requisito clave</div>
+                        <div class="meta-val" style="color:var(--gold);">Donataria Autorizada vigente</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-col mb-20">
+
+                <!-- Categories -->
+                <div>
+                    <p class="label mb-12">Categorías de Participación</p>
+
+                    <div class="cat-card" style="border-color:rgba(16,185,129,.2);">
+                        <div class="cat-title text-accent">Categoría 1 — Organización juvenil</div>
+                        <div class="cat-req">
+                            <div class="check-item"><span class="check-icon"
+                                    style="color:var(--accent)">✓</span><span>Integrada por jóvenes <strong
+                                        style="color:var(--text)">con perspectiva de juventudes</strong></span></div>
+                            <div class="check-item"><span class="check-icon"
+                                    style="color:var(--accent)">✓</span><span>Entre <strong
+                                        style="color:var(--text)">1–3 años</strong> de constitución legal ·
+                                    México</span></div>
+                            <div class="check-item"><span class="check-icon"
+                                    style="color:var(--accent)">✓</span><span>Con <strong
+                                        style="color:var(--text)">Donataria Autorizada</strong> vigente</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cat-card" style="border-color:rgba(245,158,11,.2);">
+                        <div class="cat-title" style="color:var(--gold);">Categoría 2 — OSC que trabaja con jóvenes
+                        </div>
+                        <div class="cat-req">
+                            <div class="check-item"><span class="check-icon"
+                                    style="color:var(--gold)">✓</span><span>Trabaja con grupos/colectivos de ≥4 jóvenes
+                                    <strong style="color:var(--text)">(12–29 años)</strong></span></div>
+                            <div class="check-item"><span class="check-icon"
+                                    style="color:var(--gold)">✓</span><span>Preferentemente 1–3 años; si más: exp.
+                                    probada ≥1 año con redes juveniles</span></div>
+                            <div class="check-item"><span class="check-icon" style="color:var(--gold)">✓</span><span>Con
+                                    <strong style="color:var(--text)">Donataria Autorizada</strong> vigente</span></div>
+                            <div class="check-item mt-8"><span class="check-icon">→</span><span
+                                    style="color:var(--text);font-weight:600;">AL Mexico encaja aquí — documentar exp.
+                                    con juventudes</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thematic + Contact -->
+                <div>
+                    <p class="label mb-12">Líneas Temáticas</p>
+                    <div class="card mb-16" style="padding:16px;">
+                        <div class="flex gap-8" style="flex-wrap:wrap;">
+                            <span class="tag tag-accent">Democracia</span>
+                            <span class="tag tag-accent">Ciudadanía Activa</span>
+                            <span class="tag tag-accent">Juventudes 12–29</span>
+                            <span class="tag">Pensamiento Crítico</span>
+                            <span class="tag">Participación Política</span>
+                            <span class="tag">Transparencia</span>
+                            <span class="tag">Rendición de Cuentas</span>
+                            <span class="tag">Formación Cívica</span>
+                        </div>
+                    </div>
+
+                    <p class="label mb-12">Contacto &amp; Plataforma</p>
+                    <div class="card" style="padding:16px 18px;">
+                        <div class="contact-row">
+                            <span class="contact-icon">🌐</span>
+                            <div>
+                                <div class="text-xs text-muted mb-4">Convocatoria oficial</div>
+                                <div class="font-semibold text-sm text-accent">fundacionmerced.org.mx/ideas2026</div>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="contact-icon">💻</span>
+                            <div>
+                                <div class="text-xs text-muted mb-4">Plataforma de postulación</div>
+                                <div class="font-semibold text-sm">conexionfmerced.vform.io</div>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="contact-icon">📄</span>
+                            <div>
+                                <div class="text-xs text-muted mb-4">Documentos disponibles</div>
+                                <div class="font-semibold text-sm">Bases IDEAS 2026 · Glosario PDF</div>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="contact-icon">⏰</span>
+                            <div>
+                                <div class="text-xs text-muted mb-4">Cierre</div>
+                                <div class="font-semibold text-sm" style="color:var(--gold);">27 marzo 2026 · 23:30 hrs
+                                    CDMX</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Excerpts -->
+            <div class="mb-20">
+                <p class="label mb-12">Extractos Clave — Bases IDEAS 2026 (verificadas Feb 28, 2026)</p>
+                <div class="excerpt-block green">
+                    <div class="excerpt-label">Objetivo del Programa</div>
+                    IDEAS 2026 busca fortalecer la democracia y la ciudadanía activa a través del apoyo a organizaciones
+                    que trabajan directamente con jóvenes, promoviendo su participación informada, su pensamiento
+                    crítico y su incidencia en los procesos democráticos.
+                </div>
+                <div class="excerpt-block gold">
+                    <div class="excerpt-label">Elegibilidad Categoría 2</div>
+                    Trabaja directamente con grupos o colectivos de al menos 4 integrantes jóvenes (12 a 29 años). En
+                    caso de tener más de 3 años, cuenta con experiencia probada, de al menos 1 año, con redes de grupos
+                    y/o colectivos vinculados con las líneas temáticas del programa.
+                </div>
+                <div class="excerpt-block purple">
+                    <div class="excerpt-label">Proceso de Postulación</div>
+                    Convocatoria abierta del 2 al 27 de marzo de 2026, a las 23:30 hrs (CDMX). Todas las postulaciones
+                    se reciben en la plataforma: conexionfmerced.vform.io — Documentos: Bases IDEAS 2026 + Glosario
+                    disponibles para descarga.
+                </div>
+            </div>
+
+            <!-- Alignment check -->
+            <div class="mb-20">
+                <p class="label mb-12">Quick Alignment — Accountability Lab Mexico</p>
+                <div class="align-check-grid">
+                    <div class="align-check">
+                        <span class="align-check-icon">✅</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">OSC Legal + Donataria</div>
+                            <div class="text-xs text-muted">AL Mexico: donataria autorizada activa</div>
+                        </div>
+                    </div>
+                    <div class="align-check">
+                        <span class="align-check-icon">✅</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">Democracia &amp; Ciudadanía</div>
+                            <div class="text-xs text-muted">Core de la misión AL → match directo</div>
+                        </div>
+                    </div>
+                    <div class="align-check">
+                        <span class="align-check-icon">✅</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">Accountability y Transparencia</div>
+                            <div class="text-xs text-muted">Integrity Icon + CATs = evidencia fuerte</div>
+                        </div>
+                    </div>
+                    <div class="align-check">
+                        <span class="align-check-icon">✅</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">Plazo Manejable</div>
+                            <div class="text-xs text-muted">27 días → alta prob. si se activa hoy</div>
+                        </div>
+                    </div>
+                    <div class="align-check" style="border-color:rgba(245,158,11,.2);">
+                        <span class="align-check-icon">⚠️</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">Foco en Juventudes</div>
+                            <div class="text-xs text-muted">Evidencia req. de trabajo con jóvenes 12–29</div>
+                        </div>
+                    </div>
+                    <div class="align-check" style="border-color:rgba(245,158,11,.2);">
+                        <span class="align-check-icon">⚠️</span>
+                        <div>
+                            <div class="font-semibold text-sm mb-4">Tiempo Constitución</div>
+                            <div class="text-xs text-muted">Si +3 años: documentar redes juveniles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <div class="bottom-steps">
+            <div class="bottom-dot done" title="Dashboard"></div>
+            <div class="bottom-dot active" title="Grant Detail"></div>
+            <div class="bottom-dot" title="Score"></div>
+            <div class="bottom-dot" title="Decision"></div>
+            <div class="bottom-dot" title="Generating"></div>
+            <div class="bottom-dot" title="Output"></div>
+        </div>
+        <span class="text-sm text-muted">Step 2 of 6 — Grant Detail</span>
+        <div class="flex gap-8">
+            <a href="index.html" class="btn btn-ghost">← Dashboard</a>
+            <a href="score.html" class="btn btn-primary">Run Pre-Qualification →</a>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
